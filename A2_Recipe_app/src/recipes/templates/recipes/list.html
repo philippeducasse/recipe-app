@@ -2,43 +2,31 @@
 
 <!DOCTYPE html>
 <!-- django syntax for writting python code in an HTML file -->
+
 <head>
     <title>All Recipes</title>
-    <h1>Recipe's list</h1>        {% comment%} HTML tag for heading  {% endcomment%}
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/styles.css' %}">
     <style type="text/css">
         body {
-            background: url("{% static 'recipes/images/second_bg.jpg' %}") no-repeat fixed;
+            background: url("{% static 'recipes/images/third_bg.jpg' %}") no-repeat fixed;
             background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 52vh;
-            padding: 3px;
         }
-        
-        h1,
-        h3 {
-            color: #d6d6d6;
-            font-family: 'Roboto Mono', 'Calibri', 'Trebuchet MS', sans-serif;
-            text-align: center;
-        }
-        </style>
+    </style>
 </head>
-<body>
 
-    <table border="1" cellpadding="5" cellspacing = "5">    {% comment%} start of table  {% endcomment%}
-        <tr> {% comment%}  the tr tag adds a new row   {% endcomment%}
-            <td>Recipe's Titles</td>   {% comment%} the td tag adds a column  {% endcomment%}       
-            <td>Recipe's Images</td>
-        </tr>
-        {% for object in object_list %}  {% comment%} go through each element of Recipe’s list {% endcomment%}
-        <tr>
-            <td><a href ="{{object.get_absolute_url}}"> {% comment%}  add links to book names  {% endcomment%}
-                {{object.name}}
-            </a></td>
-            <td><img src="{{object.image.url}}" width="150" height="200" /></td>
-            
-        </tr>
+<body>
+    <main class="recipes-table">
+        <section class="recipes-table__title">
+            <h3>All our Recipes</h3>
+        </section>
+        {% for object in object_list %} {% comment%} go through each element of Recipe’s list {% endcomment%}
+        <section class="recipes-table__items">
+            <div class="recipe-name"><a href="{{object.get_absolute_url}}"> {% comment%} add links to book names {% endcomment%}
+                    {{object.name}}
+                </a></div>
+            <div class="recipe-image"><img src="{{object.image.url}}" width="150" height="200" /></div>
+
+        </section>
         {% endfor %}
-    </table>
+    </main>
 </body>

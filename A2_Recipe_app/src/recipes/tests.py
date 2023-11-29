@@ -1,11 +1,12 @@
 from django.test import TestCase
 from .models import Recipe
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class RecipeModelTest(TestCase):
     def setUpTestData():
        # Set up non-modified objects used by all test methods
-        Recipe.objects.create(name= 'Test Recipe', cooking_time= 5, ingredients= 'ingredient list') 
+        Recipe.objects.create(name= 'Test Recipe', cooking_time= 5, ingredients= 'ingredient list', user_id= User.first_name) 
     def test_user_username(self):
         #get user object
         recipe = Recipe.objects.get(id = 1)
@@ -21,4 +22,14 @@ class RecipeModelTest(TestCase):
         ingredients = Recipe.objects.get(id = 1)
         field_label = ingredients._meta.get_field('ingredients').verbose_name
         self.assertEqual(field_label, 'ingredients')
+
+    # Tests URL for details page
+    def test_get_absolute_url(self):
+        recipe = Recipe.objects.get(id=1)
+        self.assertEqual(recipe.get_absolute_url(), '/list/1')
         
+    # Tests Ingredients value
+    def test_ingredients_list(self):
+        recipe = Recipe.objects.get(id=1)
+        ingredients = recipe.ingredients
+        self.assertEqual(ingredients, 'Lettuce, Tomatoes, Olive Oil, Salt')

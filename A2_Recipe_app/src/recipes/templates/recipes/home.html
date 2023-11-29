@@ -2,39 +2,28 @@
 <!-- This is the template file, corresponds to the file in recipes/views.py -->
 <!DOCTYPE html>
 <html>
-<head>
 
-    <title>
-        Recipe App Home
-    </title>
+<head>
+    <title> Recipe App Home</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/styles.css' %}">
     <style type="text/css">
-        body {
-          background: url("{% static 'recipes/images/home_page.jpg' %}") no-repeat fixed;
-          background-size: cover;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 52vh;
-          padding: 3px;
+        .home-page {
+            background: url("{% static 'recipes/images/home_page.jpg' %}") no-repeat fixed;
+            background-size: cover;
         }
-    
-        h1,
-        h3 {
-          color: #d6d6d6;
-          font-family: 'Roboto Mono', 'Calibri', 'Trebuchet MS', sans-serif;
-          text-align: center;
-        }
-      </style>
+
+    </style>
 </head>
 
-<body>
-    <main>
+<body class="home-page">
+    <main class="home-page__container">
         <h1>Welcome to the Recipe App!</h1>
         <div class="main-menu">
             <h2> Please select an action</h2>
-            <ul>
+            <ul class="main-menu__list">
                 <li>Create a new recipe</li>
-                <li><a href ="/list">View all recipe</a></li>
+                <li><a href="/list">View all recipe</a></li>
                 <li>Search for an existing recipe</li>
                 <li>Update a recipe</li>
                 <li>Delete a recipe</li>

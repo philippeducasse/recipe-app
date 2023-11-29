@@ -13,16 +13,15 @@ class Recipe(models.Model):
     image = models.ImageField(upload_to='recipes', default= 'no_picture.jpg')
 
     def calculate_difficulty(self):
-        ingredient_count = self.ingredients.count()
-        if self.cooking_time < 10 and ingredient_count < 4:
-            difficulty = "Easy"
+        ingredient_count = len(self.ingredients)
+        if self.cooking_time <= 5 and ingredient_count < 4:
+            self.difficulty = "Easy"
         elif self.cooking_time < 10 and ingredient_count >= 4:
-            difficulty = "Medium"
+            self.difficulty = "Medium"
         elif self.cooking_time >= 10 and ingredient_count < 4:
-            difficulty = "Intermediate"
+            self.difficulty = "Intermediate"
         else:
-            difficulty = "Hard"
-        return difficulty
+            self.difficulty = "Hard"
 
     def __str__(self):
         return str(self.name)

@@ -1,12 +1,27 @@
-<h2>Details: {{object.name}}</h2>
+{%load static%}
 
-<b>Name: </b> {{object.name}}  <br>
+<!DOCTYPE html>
+<!-- django syntax for writting python code in an HTML file -->
 
-<b>Cooking time: </b> {{object.cooking_time}} <br>
+<head>
+    <title>All Recipes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/styles.css' %}">
+    <style type="text/css">
+        body {
+            background: url("{% static 'recipes/images/second_bg.jpg' %}") no-repeat fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
 
-<b>Ingredients: </b> {{object.ingredients}} <br>
+<body class="details-page">
+    <container class="details-page__container">
 
-<b>Difficulty: </b> {{object.difficulty}} <br>
-
-
-<img src="{{object.image.url}}" width="200" height="300" />
+        <h2>{{object.name}}</h2>
+        <p>Cooking time: {{object.cooking_time}} </p>
+        <p>Ingredients: {{object.ingredients}}</p>
+        <div class="calc">{{object.calculate_difficulty}}</div>
+        <p>Difficulty: {{object.difficulty}} </p>
+        <img src="{{object.image.url}}" width="500" height="500" />
+    </container>
+</body>

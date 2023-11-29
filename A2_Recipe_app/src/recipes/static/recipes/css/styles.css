@@ -1,0 +1,71 @@
+body{
+    font-family: 'Roboto Mono', 'Calibri', 'Trebuchet MS', sans-serif;
+    display: flex;
+    color: #d6d6d6;
+}
+a:visited{
+    text-decoration: none;
+    color: #d6d6d6;
+}
+
+
+/* HOME PAGE */
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-page h1{
+    color: #d6d6d6;
+    text-align: center;
+}
+
+.home-page__container{
+    position: static;
+    margin-left: 400px;
+    margin-top: 205px;
+    text-decoration: none;
+}
+.main-menu__list{
+    font-size: large;
+}
+
+/* ALL RECIPES */
+
+.recipes-table{
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+
+}
+.recipes-table__items{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.recipe-name{
+    font-size: larger;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* DETAILS VIEW */
+
+.details-page{
+    color: black;
+    font-size: larger;
+}
+.details-page__container{
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.details-page__container img{
+    border-radius: 10%;
+}
+.calc{
+    display: none;
+}
