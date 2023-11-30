@@ -6,7 +6,13 @@ from django.contrib.auth.models import User
 class RecipeModelTest(TestCase):
     def setUpTestData():
        # Set up non-modified objects used by all test methods
-        Recipe.objects.create(name= 'Test Recipe', cooking_time= 5, ingredients= 'ingredient list', user_id= User.first_name) 
+        user = User.objects.create_user(username="kevin", password="kevin")
+        Recipe.objects.create(
+            name="Test Recipe",
+            cooking_time=5,
+            ingredients="Lettuce, Tomatoes, Olive Oil, Salt",
+            user_id=user,
+        ) 
     def test_user_username(self):
         #get user object
         recipe = Recipe.objects.get(id = 1)
@@ -33,3 +39,4 @@ class RecipeModelTest(TestCase):
         recipe = Recipe.objects.get(id=1)
         ingredients = recipe.ingredients
         self.assertEqual(ingredients, 'Lettuce, Tomatoes, Olive Oil, Salt')
+    

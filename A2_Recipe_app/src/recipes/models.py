@@ -11,6 +11,7 @@ class Recipe(models.Model):
     # Adds creator user id to recipe
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     image = models.ImageField(upload_to='recipes', default= 'no_picture.jpg')
+    difficulty = models.CharField(max_length=50, null=True, blank=True)
 
     def calculate_difficulty(self):
         ingredient_count = len(self.ingredients)
@@ -28,3 +29,9 @@ class Recipe(models.Model):
     
     def get_absolute_url(self):
         return reverse("recipes:detail", kwargs={"pk": self.pk})
+    
+    @property
+    def getDifficulty(self):
+        if self.difficulty is None:
+            self.calculate_difficulty()
+        return self.difficulty
