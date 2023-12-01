@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView   #to display lists & details
 from .models import Recipe                #to access Book model
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def home(request):
@@ -15,3 +17,8 @@ class RecipeDetailView(DetailView):
 
     model = Recipe
     template_name = 'recipes/detail.html'
+
+#keep protected
+@login_required
+def create(request):
+    return render(request, 'recipes/create.html')
