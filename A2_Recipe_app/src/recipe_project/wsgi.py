@@ -1,6 +1,7 @@
 """
+Thisi s for local development, mnot production.
 WSGI config for recipe_project project.
-
+web server gateway interface
 It exposes the WSGI callable as a module-level variable named ``application``.
 
 For more information on this file, see

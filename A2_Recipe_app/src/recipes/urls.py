@@ -7,8 +7,8 @@ from .views import home, RecipeListView, RecipeDetailView, create
 app_name = 'recipes'
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', home, name='home'), #name acts as ID for the path
     path('list/', RecipeListView.as_view(), name='list'),
     path('list/<pk>', RecipeDetailView.as_view(), name='detail'),
-    path('create/', create, name='create')
+    path('create/', create, name='create'),
 ]

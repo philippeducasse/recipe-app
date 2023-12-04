@@ -19,6 +19,7 @@
         <section class="recipes-table__title">
             <h3>All our Recipes</h3>
         </section>
+        <!-- object_list is from the context of the model, retrieved from RecipeListView(ListView) -->
         {% for object in object_list %} {% comment%} go through each element of Recipe’s list {% endcomment%}
         <section class="recipes-table__items">
             <div class="recipe-name"><a href="{{object.get_absolute_url}}"> {% comment%} add links to book names {% endcomment%}

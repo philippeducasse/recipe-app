@@ -14,11 +14,10 @@ class RecipeListView(ListView):           #class-based view
    template_name = 'recipes/list.html'    #specify template 
 
 class RecipeDetailView(DetailView):
-
     model = Recipe
     template_name = 'recipes/detail.html'
 
 #keep protected
-@login_required
+@login_required # redirects to login view if user is not loggedin, (from settings.py)
 def create(request):
     return render(request, 'recipes/create.html')
