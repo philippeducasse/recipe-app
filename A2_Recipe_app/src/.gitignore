@@ -2,4 +2,6 @@
 .sqlite3 
 # Backup files
 .bak 
+recipe_project/settings.py
 /recipe_project/settings.py
+settings.py
