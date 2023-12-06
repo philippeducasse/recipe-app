@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Recipe
 from django.contrib.auth.models import User
+from .forms import RecipeSearchForm
 
 # Create your tests here.
 class RecipeModelTest(TestCase):
@@ -40,3 +41,24 @@ class RecipeModelTest(TestCase):
         ingredients = recipe.ingredients
         self.assertEqual(ingredients, 'Lettuce, Tomatoes, Olive Oil, Salt')
     
+class RecipeFormTest(TestCase):
+    def test_form_validity(self):
+        form_data = {'search_value': 'Water', 'search_type': '#1'}
+        form = RecipeSearchForm(data= form_data)
+        self.assertTrue(form.is_valid())
+    def test_form_invalidity_1(self):
+        form_data = {'search_value': 'Water'}
+        form = RecipeSearchForm(data= form_data)
+        self.assertFalse(form.is_valid())
+    def test_form_invalidity_2(self):
+        form_data = {'search_type': '#3'}
+        form = RecipeSearchForm(data= form_data)
+        self.assertFalse(form.is_valid())    
+    def test_form_search_value(self):
+        form_data = {'search_value': 'Water', 'search_type': '#1'}
+        form = RecipeSearchForm(data= form_data)
+        self.assertEqual(form.data['search_value'], 'Water')
+    def test_form_search_type(self):
+        form_data = {'search_value': 'Water', 'search_type': '#3'}
+        form = RecipeSearchForm(data= form_data)
+        self.assertEqual(form.data['search_type'], '#3')

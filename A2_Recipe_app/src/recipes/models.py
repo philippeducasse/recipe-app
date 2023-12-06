@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.shortcuts import reverse
+from django.urls import reverse
 
 # Create your models here.
     
@@ -15,7 +15,8 @@ class Recipe(models.Model):
     _difficulty = models.CharField(max_length=50, null = True, blank = True, editable = False)
 
     def calculate_difficulty(self):
-        ingredient_count = len(self.ingredients)
+        ingredient_arr = self.ingredients.split(', ')
+        ingredient_count = len(ingredient_arr)
         if self.cooking_time <= 5 and ingredient_count < 4:
             self.difficulty = "Easy" ## these are accessing the setter function on line 42
         elif self.cooking_time < 10 and ingredient_count >= 4:

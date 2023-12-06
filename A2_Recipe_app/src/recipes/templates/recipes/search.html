@@ -1,0 +1,17 @@
+<h1> Search for recipes</h1>
+
+<form action="" method="POST">
+    {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
+    {{form}}
+    <button type="submit" >search</button>
+ 
+ </form> 
+ {% if recipe_df %}
+    {{recipe_df|safe}}
+    <a href='{{recipe_url}}'> Click to see details </a>
+    <br>
+   <img src="data:image/png;base64, {{chart|safe}}">
+{% else %}
+   <h3> no data</h3>
+{% endif %}
+<hr> 

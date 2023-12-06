@@ -20,12 +20,17 @@
     <main class="home-page__container">
         <h1>Welcome to the Recipe App!</h1>
         <div class="main-menu">
+
+            {% if user.is_authenticated %}
+            <a href ="{%url 'logout' %}"> Logout</a> <!--loads url "login when link is clicked" -->
+            {% else %}
             <a href ="{%url 'login' %}"> Login </a> <!--loads url "login when link is clicked" -->
+            {% endif %}
             <h2> Please select an action</h2>
             <ul class="main-menu__list">
                 <li><a href="/create">Create a new recipe</a></li>
                 <li><a href="/list">View all recipe</a></li>
-                <li>Search for an existing recipe</li>
+                <li><a href="/search">Search for an existing recipe</a></li>
                 <li>Update a recipe</li>
                 <li>Delete a recipe</li>
             </ul>
