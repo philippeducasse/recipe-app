@@ -4,6 +4,12 @@ WSGI config for recipe_project project.
 web server gateway interface
 It exposes the WSGI callable as a module-level variable named ``application``.
 
+The Procfile declares the process type and entry popnt of the application
+
+web: gunicorn recipe_project.wsgi --log-file - (from the Procfile) tells heroku
+that tihs is a web dyno and can be sent http traffic (dynos are lightwieght Linux containers
+to run Heroku apps.)
+
 For more information on this file, see
 https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
