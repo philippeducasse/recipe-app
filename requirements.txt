@@ -14,7 +14,7 @@ greenlet==3.0.1
 ipython==8.12.3
 jedi==0.19.1
 kiwisolver==1.4.5
-matplotlib @ file:///C:/Users/ducas/Documents/practice/django_books/src/matplotlib-3.5.2-cp38-cp38-win_amd64.whl#sha256=48dedd29abea5e524f3ccc53bd472c1439a11b7d03cf04e137c61a179fb3a323
+matplotlib ==3.5.2
 matplotlib-inline==0.1.6
 mysqlclient==2.2.0
 numpy==1.24.4
