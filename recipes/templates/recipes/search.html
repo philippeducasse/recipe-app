@@ -10,7 +10,9 @@
     {{recipe_df|safe}}
     <a href='{{recipe_url}}'> Click to see details </a>
     <br>
-   <img src="data:image/png;base64, {{chart|safe}}">
+    {% for chart in charts %}
+    <img src="data:image/png;base64, {{ chart|safe }}" alt="Chart {{ forloop.counter }}">
+   {% endfor %}
 {% else %}
    <h3> no data</h3>
 {% endif %}

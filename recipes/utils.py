@@ -46,11 +46,16 @@ def get_chart(search_type, data, **kwargs):
 
    #select chart_type based on user input from the form
 
-   if search_type == '#2':
+   if search_type == '#1':
        #generate pie chart based on the ingredients.
        #The recipe names are sent from the view as labels
-       ingredients=kwargs.get('ingredients')
-       plt.pie(search_type, len(data['ingredients']), labels=ingredients)
+       labels=kwargs.get('labels') 
+       title =kwargs.get('title')
+       print('UTILS :',title)
+       print('UTILS :',labels)
+
+       plt.pie(data, labels= labels)
+       plt.title(title)
 
    elif search_type == '#3':
        #plot line chart based on date on x-axis and price on y-axis
@@ -63,4 +68,7 @@ def get_chart(search_type, data, **kwargs):
 
    #render the graph to file
    chart =get_graph() 
-   return chart         
+   return chart
+
+        # https://www.geeksforgeeks.org/how-to-create-pie-chart-from-pandas-dataframe/# 
+        # fix Makefile / install make
