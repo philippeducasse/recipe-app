@@ -1,19 +1,37 @@
 <h1> Search for recipes</h1>
 
 <form action="" method="POST">
-    {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
-    {{form}}
-    <button type="submit" >search</button>
- 
- </form> 
- {% if recipe_df %}
-    {{recipe_df|safe}}
-    <a href='{{recipe_url}}'> Click to see details </a>
-    <br>
-    {% for chart in charts %}
-    <img src="data:image/png;base64, {{ chart|safe }}" alt="Chart {{ forloop.counter }}">
-   {% endfor %}
+   {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
+   {{form}}
+   <button type="submit">search</button>
+
+</form>
+{% if recipe_data %}
+<table>
+   <thead>
+      <tr>
+         <th>Name</th>
+         <th>Cooking Time</th>
+         <th>Ingredients</th>
+         <th>Difficulty</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for recipe in recipe_data %}
+      <tr>
+         <td><a href="{{recipe.url}}">{{ recipe.name}}</a></td>
+         <td>{{ recipe.cooking_time }}</td>
+         <td>{{ recipe.formatted_ingredients }}</td>
+         <td>{{ recipe.difficulty }}</td>
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+{% for chart in charts %}
+<img src="data:image/png;base64, {{ chart|safe }}" alt="Chart {{ forloop.counter }}">
+{% endfor %}
 {% else %}
-   <h3> no data</h3>
+<h3> no data</h3>
 {% endif %}
-<hr> 
+<hr>

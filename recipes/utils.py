@@ -51,8 +51,6 @@ def get_chart(search_type, data, **kwargs):
        #The recipe names are sent from the view as labels
        labels=kwargs.get('labels') 
        title =kwargs.get('title')
-       print('UTILS :',title)
-       print('UTILS :',labels)
 
        plt.pie(data, labels= labels)
        plt.title(title)
