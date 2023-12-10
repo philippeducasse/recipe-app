@@ -55,9 +55,12 @@ def get_chart(search_type, data, **kwargs):
        plt.pie(data, labels= labels)
        plt.title(title)
 
-   elif search_type == '#3':
+   elif search_type == '#2':
        #plot line chart based on date on x-axis and price on y-axis
-       plt.bar(data['cooking_time'], data['name'])
+       labels=kwargs.get('labels') 
+       title =kwargs.get('title')
+       plt.bar(data, labels = labels)
+       plt.title(title)
    else:
        print ('unknown chart type')
 

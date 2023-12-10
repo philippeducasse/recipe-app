@@ -27,8 +27,7 @@ def create(request):
 
 def search(request):
     form = RecipeSearchForm(request.POST or None)
-    recipe_df = None #initialize dataframe to None
-    recipe_url = None #initialize url to None
+    recipe_data =  {}#initialize dataframe to None
     charts = set()
 
     if request.method == 'POST':
@@ -42,7 +41,6 @@ def search(request):
             if qs: #if data found
                     #convert the ID to Name of recipe
                     #get ingredients_lis
-                urls = []
                 for recipe in qs:
                     recipe_data = list(qs.values())  # Convert queryset values to a list of dictionaries
                     for data in recipe_data:
@@ -60,14 +58,51 @@ def search(request):
                         chart = get_chart(search_type, ingredients_val, labels=labels, title= title)
                         charts.add(chart)
 
-                        # You might need to do something similar for 'difficulty' if it's a calculated property
                     recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
                     # convert the queryset values to pandas dataframe
                     # Convert DataFrame to list of dictionaries
                     recipe_data = recipe_df.to_dict('records')
                     print(recipe_data)
-        else:
-            print('No recipes found.')
+            else:
+                print('No recipes found.')
+
+        if search_type == '#2':
+            target_ingredient = request.POST.get('search_value')
+            recipes = Recipe.objects.all()
+            # Have to access it this way because the Django lookip __icontains 
+            # cannot access getter methods necessary for the _formatted ingredients
+            qs = [
+                recipe for recipe in recipes if target_ingredient.lower() in recipe.formatted_ingredients.lower() 
+            ]
+            print(qs)
+            if qs:
+                for recipe in qs:
+                    recipe_data = [obj.__dict__ for obj in qs]
+                    for data in recipe_data:
+                        recipe_instance = Recipe.objects.get(pk=data['id'])  # Fetch the Recipe instance
+                        data['formatted_ingredients'] = recipe_instance.formatted_ingredients  # Calculate formatted ingredients
+                        data['difficulty'] = recipe_instance.difficulty  
+                        data['url'] = recipe_instance.get_absolute_url()# Call get_absolute_url() on the instance
+                        title = data['name'] 
+                        labels= recipe_instance.formatted_ingredients.split(', ')
+                        alignment = []
+                        
+                        ingredients_val = []
+                        # here we just want to get an array of numbers for each ingredient. 
+                        # Since the labels is in the right format im using that
+                        for ingredient in labels:
+                            ingredients_val.append(1)
+                        chart = get_chart(search_type, ingredients_val, labels=labels, title= title)
+                        charts.add(chart)
+
+                    recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
+                    # convert the queryset values to pandas dataframe
+                    # Convert DataFrame to list of dictionaries
+                    recipe_data = recipe_df.to_dict('records')
+                    print(recipe_data)
+
+
+
     context = {
         'form' : form,
         'recipe_data': recipe_data,
