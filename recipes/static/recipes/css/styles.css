@@ -1,31 +1,33 @@
-body{
-    font-family: 'Roboto Mono', 'Calibri', 'Trebuchet MS', sans-serif;
-    display: flex;
-    color: #d6d6d6;
-}
-a:visited{
-    text-decoration: none;
-    color: #d6d6d6;
-}
-
 
 /* HOME PAGE */
 .home-page {
-    display: flex;
     justify-content: center;
     align-items: center;
+    color: #d6d6d6;
 }
 
 .home-page h1{
-    color: #d6d6d6;
+    
     text-align: center;
 }
 
 .home-page__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: static;
-    margin-left: 400px;
-    margin-top: 205px;
     text-decoration: none;
+}
+.home-page__container a:visited{
+    text-decoration: none;
+    color: #d6d6d6;
+}
+.welcome{
+    margin: 70px;
+}
+.main-menu{
+    margin-left: 250px
 }
 .main-menu__list{
     font-size: large;

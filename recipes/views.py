@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecipeSearchForm
 import pandas as pd
 from .utils import get_recipename_from_id, get_chart
+import random
 
 # Create your views here.
 
@@ -41,28 +42,22 @@ def search(request):
             if qs: #if data found
                     #convert the ID to Name of recipe
                     #get ingredients_lis
+                print('qs : ', qs)
                 for recipe in qs:
                     recipe_data = list(qs.values())  # Convert queryset values to a list of dictionaries
-                    for data in recipe_data:
-                        recipe_instance = Recipe.objects.get(pk=data['id'])  # Fetch the Recipe instance
-                        data['formatted_ingredients'] = recipe_instance.formatted_ingredients  # Calculate formatted ingredients
-                        data['difficulty'] = recipe_instance.difficulty  
-                        data['url'] = recipe_instance.get_absolute_url()# Call get_absolute_url() on the instance
-                        title = data['name'] 
-                        labels= recipe_instance.formatted_ingredients.split(', ')
-                        ingredients_val = []
-                        # here we just want to get an array of numbers for each ingredient. 
-                        # Since the labels is in the right format im using that
-                        for ingredient in labels:
-                            ingredients_val.append(1)
-                        chart = get_chart(search_type, ingredients_val, labels=labels, title= title)
-                        charts.add(chart)
+                    labels = recipe.formatted_ingredients.split(', ')
+                    title = recipe.name 
+                    # create a random number for each ingredient to display in the pie chart
+                    ingredients_val = [] 
+                    for ingredient in labels:
+                            ingredients_val.append(random.randint(1,20))
 
-                    recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
+                    chart = get_chart(search_type, ingredients_val, labels=labels, title= title)
+                    charts.add(chart)
+
+                recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
                     # convert the queryset values to pandas dataframe
                     # Convert DataFrame to list of dictionaries
-                    recipe_data = recipe_df.to_dict('records')
-                    print(recipe_data)
             else:
                 print('No recipes found.')
 
@@ -78,28 +73,26 @@ def search(request):
             if qs:
                 for recipe in qs:
                     recipe_data = [obj.__dict__ for obj in qs]
+                    recipe_names = []
+                    cooking_times = []
                     for data in recipe_data:
                         recipe_instance = Recipe.objects.get(pk=data['id'])  # Fetch the Recipe instance
                         data['formatted_ingredients'] = recipe_instance.formatted_ingredients  # Calculate formatted ingredients
                         data['difficulty'] = recipe_instance.difficulty  
                         data['url'] = recipe_instance.get_absolute_url()# Call get_absolute_url() on the instance
-                        title = data['name'] 
-                        labels= recipe_instance.formatted_ingredients.split(', ')
-                        alignment = []
+                        recipe_names.append(recipe_instance.name)
+                        cooking_times.append(recipe_instance.cooking_time)
                         
-                        ingredients_val = []
-                        # here we just want to get an array of numbers for each ingredient. 
-                        # Since the labels is in the right format im using that
-                        for ingredient in labels:
-                            ingredients_val.append(1)
-                        chart = get_chart(search_type, ingredients_val, labels=labels, title= title)
-                        charts.add(chart)
+                print(recipe_names, cooking_times)
+                        
+                chart = get_chart(search_type, recipe_names, cooking_times= cooking_times)
+                charts.add(chart)
 
-                    recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
+                recipe_df = pd.DataFrame(recipe_data)  # Create DataFrame from the list of dictionaries
                     # convert the queryset values to pandas dataframe
                     # Convert DataFrame to list of dictionaries
-                    recipe_data = recipe_df.to_dict('records')
-                    print(recipe_data)
+                recipe_data = recipe_df.to_dict('records')
+                print(recipe_data)
 
 
 

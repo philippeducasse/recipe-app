@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {%load static%}
 
-<!DOCTYPE html>
 <!-- django syntax for writting python code in an HTML file -->
 
 <head>
@@ -8,13 +8,52 @@
     <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/styles.css' %}">
     <style type="text/css">
         body {
-            background: url("{% static 'recipes/images/second_bg.jpg' %}") no-repeat fixed;
+            background: url("{% static 'recipes/images/home_page.jpg' %}") no-repeat fixed;
             background-size: cover;
         }
     </style>
 </head>
 
 <body class="details-page">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary text-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://philippeducasse.github.io/portfolio/" target="_blank">To portfolio
+                website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/list">View all recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create">Create a new recipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search for a recipe</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item text-end">
+                        <a class="nav-link" href="{%url 'logout' %}"> Logout</a>
+                        <!--loads url "login when link is clicked" -->
+
+                    </li>
+                    {% else %}
+                    <li class="nav-item text-end">
+                        <a class="nav-link" href="{%url 'login' %}"> Login </a>
+                        <!--loads url "login when link is clicked" -->
+
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
     <container class="details-page__container">
 
         <h2>{{object.name}}</h2>
@@ -23,4 +62,5 @@
         <p>Difficulty: {{object.difficulty}} </p>
         <img src="{{object.image.url}}" width="500" height="500" />
     </container>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

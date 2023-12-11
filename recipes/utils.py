@@ -59,8 +59,10 @@ def get_chart(search_type, data, **kwargs):
        #plot line chart based on date on x-axis and price on y-axis
        labels=kwargs.get('labels') 
        title =kwargs.get('title')
-       plt.bar(data, labels = labels)
-       plt.title(title)
+       cooking_times = kwargs.get('cooking_times')
+       plt.bar(data, cooking_times)
+       plt.title('Search results')
+       plt.ylabel('Cooking Time')
    else:
        print ('unknown chart type')
 
@@ -70,6 +72,3 @@ def get_chart(search_type, data, **kwargs):
    #render the graph to file
    chart =get_graph() 
    return chart
-
-        # https://www.geeksforgeeks.org/how-to-create-pie-chart-from-pandas-dataframe/# 
-        # fix Makefile / install make
