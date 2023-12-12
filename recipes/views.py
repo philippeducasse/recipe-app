@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView   #to display lists & details
+from typing import Any
+from django.db import models
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView   #to display lists & details
 from .models import Recipe                #to access recipe model
 from django.contrib.auth.decorators import login_required
-from .forms import RecipeSearchForm
+from .forms import RecipeSearchForm, CreateRecipeForm
 import pandas as pd
 from .utils import get_recipename_from_id, get_chart
 import random
@@ -21,10 +24,56 @@ class RecipeDetailView(DetailView):
     model = Recipe
     template_name = 'recipes/detail.html'
 
+
+class RecipeDeleteView(DeleteView):
+    model = Recipe
+    success_url = reverse_lazy('recipes/list.html')
+    template_name = 'recipes/delete.html'
+        
+
 #keep protected
 @login_required # redirects to login view if user is not loggedin, (from settings.py)
 def create(request):
-    return render(request, 'recipes/create.html')
+    form = CreateRecipeForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()  # Save the form data if it's valid
+            # Redirect or perform any other action after successful form submission
+            return redirect('/create_success')  # Redirect to the same page after form submission
+    context = {'form': form}
+    return render(request, 'recipes/create.html', context)
+
+def create_success(request):
+    return render(request, 'recipes/create_success.html')
+
+#Update Recipe
+@login_required
+def udpate_recipe(request, pk):
+    recipe = Recipe.objects.get(id = pk)
+    # instance sends all info of recipe in the fields
+    form = CreateRecipeForm(request.POST or None, instance = recipe)
+    if form.is_valid():
+            form.save()  # Save the form data if it's valid
+            # Redirect or perform any other action after successful form submission
+            return redirect('/update_success')  # Redirect to list page after form submission
+    context = {
+        'form': form,
+               }
+    return render(request, 'recipes/update.html', context)
+    # form = UpdateRecipeForm(request.POST or None)
+
+def update_success(request):
+    return render(request, 'recipes/update_success.html')
+
+# Delete Recipe
+@login_required
+def delete_recipe(request, pk):
+    recipe = Recipe.objects.get(id = pk)
+    recipe.delete()
+    return redirect('/delete')
+
+def delete_success(request):
+    return render(request, 'recipes/delete.html')
 
 def search(request):
     form = RecipeSearchForm(request.POST or None)

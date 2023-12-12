@@ -6,12 +6,6 @@
 <head>
    <title>All Recipes</title>
    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/styles.css' %}">
-   <style type="text/css">
-      body {
-         background: url("{% static 'recipes/images/home_page.jpg' %}") no-repeat fixed;
-         background-size: cover;
-      }
-   </style>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -56,26 +50,26 @@
          </div>
       </div>
    </nav>
-   <h1>Login</h1> {% comment %} print heading {% endcomment %}
+   <container class="login-page">
+      <h1>Login</h1> {% comment %} print heading {% endcomment %}
 
-   {% comment %} check for error message {% endcomment %}
-   {% if error_message %}
-   {{error_message}}
-   {% endif %}
+      {% comment %} check for error message {% endcomment %}
+      {% if error_message %}
+      {{error_message}}
+      {% endif %}
 
-   {% comment %} print form {% endcomment %}
-   <form action="" method="POST">
-      {% comment %} add Django security token {% endcomment %}
-      {% csrf_token %}
+      {% comment %} print form {% endcomment %}
+      <form action="" method="POST" class="login-form">
+         {% comment %} add Django security token {% endcomment %}
+         {% csrf_token %}
 
-      {% comment %} print form received from view {% endcomment %}
-      {{form}}
+         {% comment %} print form received from view {% endcomment %}
+         {{form}}
 
-      {% comment %} add button {% endcomment %}
-      <button type="submit">Login</button>
-   </form>
-
-
+         {% comment %} add button {% endcomment %}
+         <button class="btn btn-success" type="submit">Login</button>
+      </form>
+   </container>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"></script>
