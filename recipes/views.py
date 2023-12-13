@@ -34,15 +34,17 @@ class RecipeDeleteView(DeleteView):
 #keep protected
 @login_required # redirects to login view if user is not loggedin, (from settings.py)
 def create(request):
-    form = CreateRecipeForm(request.POST or None)
     if request.method == 'POST':
+        form = CreateRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()  # Save the form data if it's valid
             # Redirect or perform any other action after successful form submission
             return redirect('/create_success')  # Redirect to the same page after form submission
+    else:
+        form = CreateRecipeForm()
+
     context = {'form': form}
     return render(request, 'recipes/create.html', context)
-
 def create_success(request):
     return render(request, 'recipes/create_success.html')
 
@@ -50,12 +52,15 @@ def create_success(request):
 @login_required
 def udpate_recipe(request, pk):
     recipe = Recipe.objects.get(id = pk)
-    # instance sends all info of recipe in the fields
-    form = CreateRecipeForm(request.POST or None, instance = recipe)
-    if form.is_valid():
-            form.save()  # Save the form data if it's valid
-            # Redirect or perform any other action after successful form submission
-            return redirect('/update_success')  # Redirect to list page after form submission
+    if request.method == 'POST':
+        # instance sends all info of recipe in the fields
+        form = CreateRecipeForm(request.POST, request.FILES, instance = recipe)
+        if form.is_valid():
+                form.save()  # Save the form data if it's valid
+                # Redirect or perform any other action after successful form submission
+                return redirect('/update_success')  # Redirect to list page after form submission
+    else:
+        form = CreateRecipeForm(instance=recipe)
     context = {
         'form': form,
                }

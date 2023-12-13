@@ -17,13 +17,21 @@ class RecipeSearchForm(forms.Form):
    
 ## create recipe form
 class CreateRecipeForm(ModelForm):
-   ingredients_input = forms.CharField(label='Ingredients', max_length=120, help_text='separated by commas')
+   ingredients_input = forms.CharField(label='Ingredients', max_length=120)
    class Meta:
         model = Recipe
         fields = ['name', 'cooking_time', 'image', 'user_id']
         # Exclude 'ingredients' as it will be handled separately
         exclude = ['ingredients']
         # change the default input of ingredients from multiple choice to charfield
+
+    # Set placeholder values as help text
+   def __init__(self, *args, **kwargs):
+        super(CreateRecipeForm, self).__init__(*args, **kwargs)
+        self.fields['ingredients_input'].widget.attrs['placeholder'] = 'separated by commas'
+        self.fields['cooking_time'].widget.attrs['placeholder'] = 'in minutes'
+
+
    def save(self, commit = True):
       # Save the Recipe instance without committing to the database yet
         instance = super().save(commit=False)

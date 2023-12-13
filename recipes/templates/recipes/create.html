@@ -52,10 +52,10 @@
     </nav>
     <container class="create-recipe">
     <h1>Create a new recipe</h1>
-    <form action="" method="POST" class="recipe-form">
+    <form action="" method="POST" enctype="multipart/form-data" class="form recipe-form">
         {% comment %} add Django security token {% endcomment %}
         {% csrf_token %}
-        {{form}}
+        {{form.as_p}}
         {% comment %} add button {% endcomment %}
         <button class="btn btn-success" type="submit">Create recipe</button>
     </form>

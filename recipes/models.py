@@ -12,7 +12,7 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=120)
-    cooking_time = models.PositiveIntegerField(help_text='in minutes')
+    cooking_time = models.PositiveIntegerField()
     ingredients = models.ManyToManyField(Ingredient)
     # Adds creator user id to recipe
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)

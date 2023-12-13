@@ -12,6 +12,12 @@ body {
     color: var(--primary-color);
 }
 
+/* NAVBAR */
+
+.navbar-nav{
+
+}
+
 /* HOME PAGE */
 .home-page {
     justify-content: center;
@@ -68,30 +74,75 @@ body {
 .recipes-table__title{
     margin-bottom: 50px;
 }
+
 .recipe-name{
     font-size: larger;
     text-align: center;
-    margin-top: 30px;
+    margin: 30px 0 15px;
+}
+.recipe-name a{
+   color: black;
+}
+.recipe-image{
+    border-radius: 10%;
+    object-fit: cover;
 }
 
 /* DETAILS page */
 
-.details-page{
+.details-page {
     color: var(--primary-color);
     display: flex;
+    justify-content: center;
+    margin: 0 300px
+}
+
+.details-card {
+    background-color: rgba(242, 250, 241, 0.7) !important;
+    padding: 20px; /* Add padding to the card body */
+    margin: 50px ;
+    min-height: 400px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-first {
+    margin: 20px auto 0;
     text-align: center;
 }
-.details-card{
-    margin: 200px;
-    background-color: rgba(242, 250, 241, 0.7) !important;
+
+.card-second {
+    display: flex;
+    align-items: center;
 }
-.details-page img{
+
+.detail-image {
     max-width: 50%;
-    border-radius: 10%;
+    max-height: 100%; /* Adjust height to maintain aspect ratio */
+    border-radius: 10px; /* Correct the property value */
+    overflow: hidden; /* Hide overflowing content */
+    margin-right: 20px;
 }
-.detail-btn{
+
+.detail-image img {
+    width: 100%; /* Fill the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Fit the image within the container */
+}
+
+.detail-btn {
     width: 150px;
-    margin: 20px auto;
+    margin-bottom: 10px; /* Adjust margin */
+}
+
+.card-links{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
 }
 
 /* LOGIN PAGE */
@@ -138,6 +189,29 @@ body {
     flex-direction: column;
     margin: 50px 0 150px 400px;
 }
+.recipe-form label{
+    display: block;
+}
 .recipe-form input{
     margin: 10px 0;
+}
+.recipe-form button{
+    margin-top: 20px;
+}
+
+.recipe-form a {
+        color: var(--primary-color)!important;
+        text-decoration: none;
+}
+
+/* SUCCESS PAGE */
+.success-page{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 70px 0 0 300px;
+    color: var(--primary-color);
+}
+.success-page a{
+    margin-top: 50px;
 }

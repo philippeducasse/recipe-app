@@ -47,11 +47,11 @@
       </div>
    </div>
 </nav>
-<container>
+<container class=" create-recipe">
 
    <h1> Search for recipes</h1>
 
-   <form action="" method="POST" class="form">
+   <form action="" method="POST" class="form recipe-form" >
       {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
       {{form}}
       <button type="submit" class="btn btn-success">search</button>
@@ -70,7 +70,7 @@
       <tbody>
          {% for recipe in recipe_data %}
          <tr>
-            <td><a href="{{recipe.get_absolute_url}}">{{ recipe.name}}</a></td>
+            <td><a href="{{recipe.url}}">{{ recipe.name}}</a></td>
             <td>{{ recipe.cooking_time }}</td>
             <td>{{ recipe.formatted_ingredients }}</td>
             <td>{{ recipe.difficulty }}</td>
