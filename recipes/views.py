@@ -84,6 +84,7 @@ def search(request):
     form = RecipeSearchForm(request.POST or None)
     recipe_data =  {}#initialize dataframe to None
     charts = set()
+    recipes = []
 
     if request.method == 'POST':
         #read the recipe_name and chart_type
@@ -93,6 +94,7 @@ def search(request):
             recipe_name = request.POST.get('search_value')
             #icontains is the Django lookup fucntions
             qs = Recipe.objects.filter(name__icontains = recipe_name)
+            recipes = qs
             if qs: #if data found
                     #convert the ID to Name of recipe
                     #get ingredients_lis
@@ -123,6 +125,7 @@ def search(request):
             qs = [
                 recipe for recipe in recipes if target_ingredient.lower() in recipe.formatted_ingredients.lower() 
             ]
+            recipes = qs
             print(qs)
             if qs:
                 for recipe in qs:
@@ -154,6 +157,7 @@ def search(request):
         'form' : form,
         'recipe_data': recipe_data,
         'charts': list(charts),
+        'recipes': recipes,
         }
 
     return render(request, 'recipes/search.html', context)

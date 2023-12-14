@@ -68,9 +68,9 @@
          </tr>
       </thead>
       <tbody>
-         {% for recipe in recipe_data %}
+         {% for recipe in recipes %}
          <tr>
-            <td><a href="{{recipe.url}}">{{ recipe.name}}</a></td>
+            <td><a href="{{recipe.get_absolute_url}}">{{ recipe.name}}</a></td>
             <td>{{ recipe.cooking_time }}</td>
             <td>{{ recipe.formatted_ingredients }}</td>
             <td>{{ recipe.difficulty }}</td>
