@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,7 @@ SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY','django-insecure-ml49cp(e)=yakp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['still-brushlands-36598-4a5023bac5ba.herokuapp.com/', '.still-brushlands-36598.herokuapp.com', '.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['reci-please.herokuapp.com/', '.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[
-   BASE_DIR / 'static'
+   BASE_DIR / 'recipes' /'static'
 ]
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
