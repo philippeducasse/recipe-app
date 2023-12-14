@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 #Django Form for authentication
 from django.contrib.auth.forms import AuthenticationForm  
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 def login_view(request):
@@ -36,6 +38,40 @@ def login_view(request):
 
         # load the login page using "context" information
     return render(request, 'auth/login.html', context)
+
+def signup_view(request):
+    error_message = None
+
+    form = UserCreationForm
+
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  
+            # load the profile instance created by the signal
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+
+        #use Django authenticate function to validate the user
+
+            user = authenticate(username = user.username, password = raw_password)
+            if user is not None:
+                login(request, user)
+                return redirect('recipes:home')
+            
+        else:
+            error_message = 'Something went wrong.'
+
+        #prepare data to send from view to template
+    context = {
+        'form': form,
+        'error_message': error_message
+    }
+
+        # load the login page using "context" information
+    return render(request, 'auth/signup.html', context)
 
 def logout_view(request):
     logout(request) #predifined Django logout
