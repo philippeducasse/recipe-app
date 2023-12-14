@@ -9,3 +9,6 @@ dev-makemigrations:
 
 dev-migrate:
 	python manage.py migrate --settings=recipe_project.settings.dev
+
+prod-migrate:
+	heroku run python manage.py migrate --settings=recipe_project.settings.prod

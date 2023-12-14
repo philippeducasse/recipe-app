@@ -30,4 +30,24 @@ This app allows users to create and browse cooking recipes. Registered users can
 - to run the file locally run (this will require you to install Make on your virtual environment)
     make dev-start
 
-## 
+## Hosting the App on Heroku
+
+- Signup for a free account at https://www.heroku.com/
+
+- Install the Heroku client from the website
+
+- Then login by running 
+
+$ Heroku Login
+
+- Create your app by running
+
+$ heroku create
+
+- To push the changes to heroku, run
+
+$ git push heroku main
+
+- Finally, set up the database tables
+
+$ heroku run python manage.py migrate
