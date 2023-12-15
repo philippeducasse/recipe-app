@@ -2,6 +2,9 @@
 
 from django.urls import path
 from .views import home, RecipeListView, RecipeDetailView, create, search, delete_recipe, udpate_recipe, update_success, create_success, delete_success
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 # required for path to work, corresponds to "path('', include('recipes.urls'))" in recipe_project/urls.py
 app_name = 'recipes'
@@ -18,3 +21,5 @@ urlpatterns = [
     path('update/<pk>', udpate_recipe, name= 'update'),
     path('update_success/', update_success, name= 'update_success'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
