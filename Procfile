@@ -1,1 +1,1 @@
-web: DJANGO_SETTINGS_MODULE=recipe_project.settings.prod python manage.py migrate && gunicorn recipe_project.wsgi --log-file -
+web: python manage.py migrate --settings=recipe_project.settings.prod && gunicorn --env DJANGO_SETTINGS_MODULE=recipe_project.settings.prod
