@@ -98,7 +98,6 @@ def search(request):
             if qs: #if data found
                     #convert the ID to Name of recipe
                     #get ingredients_lis
-                print('qs : ', qs)
                 for recipe in qs:
                     recipe_data = list(qs.values())  # Convert queryset values to a list of dictionaries
                     labels = recipe.formatted_ingredients.split(', ')
@@ -126,7 +125,6 @@ def search(request):
                 recipe for recipe in recipes if target_ingredient.lower() in recipe.formatted_ingredients.lower() 
             ]
             recipes = qs
-            print(qs)
             if qs:
                 for recipe in qs:
                     recipe_data = [obj.__dict__ for obj in qs]
@@ -140,7 +138,6 @@ def search(request):
                         recipe_names.append(recipe_instance.name)
                         cooking_times.append(recipe_instance.cooking_time)
                         
-                print(recipe_names, cooking_times)
                         
                 chart = get_chart(search_type, recipe_names, cooking_times= cooking_times)
                 charts.add(chart)
@@ -149,7 +146,6 @@ def search(request):
                     # convert the queryset values to pandas dataframe
                     # Convert DataFrame to list of dictionaries
                 recipe_data = recipe_df.to_dict('records')
-                print(recipe_data)
 
 
 

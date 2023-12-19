@@ -42,7 +42,7 @@ def get_chart(search_type, data, **kwargs):
    plt.switch_backend('AGG')
 
    #specify figure size
-   fig=plt.figure(figsize=(6,3))
+   plt.figure(figsize=(6,3))
 
    #select chart_type based on user input from the form
 
@@ -60,7 +60,8 @@ def get_chart(search_type, data, **kwargs):
        labels=kwargs.get('labels') 
        title =kwargs.get('title')
        cooking_times = kwargs.get('cooking_times')
-       plt.bar(data, cooking_times)
+       bar_colors = ['tab:red', 'tab:blue', 'tab:orange', 'tab:green']
+       plt.bar(data, cooking_times, width=0.2, align='center', color=bar_colors )
        plt.title('Search results')
        plt.ylabel('Cooking Time')
    else:

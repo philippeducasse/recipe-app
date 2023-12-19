@@ -9,86 +9,90 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary text-dark">
-   <div class="container-fluid">
-      <a class="navbar-brand" href="https://philippeducasse.github.io/portfolio/" target="_blank">To portfolio
-         website</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-         <ul class="navbar-nav">
-            <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="/list">View all recipes</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="/create">Create a new recipe</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="/search">Search for a recipe</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item text-end">
-               <a class="nav-link" href="{%url 'logout' %}"> Logout</a> <!--loads url "login when link is clicked" -->
+   <nav class="navbar navbar-expand-lg bg-body-tertiary text-dark">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="https://philippeducasse.github.io/portfolio/" target="_blank">To portfolio
+            website</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/list">View all recipes</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/create">Create a new recipe</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="/search">Search for a recipe</a>
+               </li>
+               {% if user.is_authenticated %}
+               <li class="nav-item text-end">
+                  <a class="nav-link" href="{%url 'logout' %}"> Logout</a>
+                  <!--loads url "login when link is clicked" -->
 
-            </li>
-            {% else %}
-            <li class="nav-item text-end">
-               <a class="nav-link" href="{%url 'login' %}"> Login </a> <!--loads url "login when link is clicked" -->
+               </li>
+               {% else %}
+               <li class="nav-item text-end">
+                  <a class="nav-link" href="{%url 'login' %}"> Login </a> <!--loads url "login when link is clicked" -->
 
-            </li>
-            {% endif %}
-         </ul>
+               </li>
+               {% endif %}
+            </ul>
+         </div>
       </div>
-   </div>
-</nav>
-<container class=" create-recipe">
+   </nav>
+   <container class="recipe-search">
 
-   <h1> Search for recipes</h1>
+      <h1> Search for recipes</h1>
 
-   <form action="" method="POST" class="form recipe-form" >
-      {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
-      {{form}}
-      <button type="submit" class="btn btn-success">search</button>
+      <form action="" method="POST" class="form search-form">
+         {% csrf_token %} <!--Cross site request forgery protection, Djangos security feature-->
+         {{form}}
+         <button type="submit" class="btn btn-success">Search</button>
 
-   </form>
-   {% if recipe_data %}
-   <table>
-      <thead>
-         <tr>
-            <th>Name</th>
-            <th>Cooking Time</th>
-            <th>Ingredients</th>
-            <th>Difficulty</th>
-         </tr>
-      </thead>
-      <tbody>
-         {% for recipe in recipes %}
-         <tr>
-            <td><a href="{{recipe.get_absolute_url}}">{{ recipe.name}}</a></td>
-            <td>{{ recipe.cooking_time }}</td>
-            <td>{{ recipe.formatted_ingredients }}</td>
-            <td>{{ recipe.difficulty }}</td>
-         </tr>
+      </form>
+      {% if recipe_data %}
+      <table class="results-table table table-striped p-5 text-center" style="--bs-table-bg: rgba(255, 255, 255, 0.9);">
+         <thead>
+            <tr>
+               <th>Name</th>
+               <th>Cooking Time</th>
+               <th>Ingredients</th>
+               <th>Difficulty</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for recipe in recipes %}
+            <tr>
+               <td><a href="{{recipe.get_absolute_url}}">{{ recipe.name}}</a></td>
+               <td>{{ recipe.cooking_time }}</td>
+               <td>{{ recipe.formatted_ingredients }}</td>
+               <td>{{ recipe.difficulty }}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      <div class="charts">
+         {% for chart in charts %}
+         <img src="data:image/png;base64, {{ chart|safe }}" alt="Chart {{ forloop.counter }}">
          {% endfor %}
-      </tbody>
-   </table>
+         {% else %}
+         <h3> No recipes found</h3>
+         {% endif %}
+         <hr>
+      </div>
+   </container>
 
-   {% for chart in charts %}
-   <img src="data:image/png;base64, {{ chart|safe }}" alt="Chart {{ forloop.counter }}">
-   {% endfor %}
-   {% else %}
-   <h3> No recipes found</h3>
-   {% endif %}
-   <hr>
-</container>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
 
 </body>
