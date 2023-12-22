@@ -1,5 +1,9 @@
 ## Recipe App ##
 
+## TO DO ##
+Add footer with portfolio
+fix homepage
+
 ## Intro
 
 Built with Python Django

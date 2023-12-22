@@ -35,7 +35,7 @@ class RecipeDeleteView(DeleteView):
 @login_required # redirects to login view if user is not loggedin, (from settings.py)
 def create(request):
     if request.method == 'POST':
-        form = CreateRecipeForm(request.POST, request.FILES)
+        form = CreateRecipeForm(request.POST)
         if form.is_valid():
             form.save()  # Save the form data if it's valid
             # Redirect or perform any other action after successful form submission
@@ -54,7 +54,7 @@ def udpate_recipe(request, pk):
     recipe = Recipe.objects.get(id = pk)
     if request.method == 'POST':
         # instance sends all info of recipe in the fields
-        form = CreateRecipeForm(request.POST, request.FILES, instance = recipe)
+        form = CreateRecipeForm(request.POST, instance = recipe)
         if form.is_valid():
                 form.save()  # Save the form data if it's valid
                 # Redirect or perform any other action after successful form submission

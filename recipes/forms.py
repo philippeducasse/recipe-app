@@ -30,6 +30,8 @@ class CreateRecipeForm(ModelForm):
         super(CreateRecipeForm, self).__init__(*args, **kwargs)
         self.fields['ingredients_input'].widget.attrs['placeholder'] = 'separated by commas'
         self.fields['cooking_time'].widget.attrs['placeholder'] = 'in minutes'
+        self.fields['image'].widget.attrs['placeholder'] = 'enter image url'
+
 
 
    def save(self, commit = True):

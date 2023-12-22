@@ -3,6 +3,16 @@ from .models import Recipe
 from django.contrib.auth.models import User
 from .forms import RecipeSearchForm
 
+# MODELS
+# test methods in models
+# test validators
+# test that tables are successfully being created
+ 
+# VIEWS
+# check that links redirect to right place
+# check that responses are in correct format
+# integration test
+
 # Create your tests here.
 class RecipeModelTest(TestCase):
     def setUpTestData():

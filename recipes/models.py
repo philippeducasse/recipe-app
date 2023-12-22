@@ -16,7 +16,8 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(Ingredient)
     # Adds creator user id to recipe
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    image = models.ImageField(upload_to='recipes', default= 'no_picture.jpg')
+    # CHANGE THIS TO url FIELD 
+    image = models.URLField(max_length=200)
     #underscore makes property protected
     _difficulty = models.CharField(max_length=50, null = True, blank = True, editable = False)
     _formatted_ingredients = models.CharField(max_length=50, null = True, blank = True, editable = False)
