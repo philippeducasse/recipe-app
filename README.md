@@ -50,7 +50,7 @@ $ heroku create
 
 - To push the changes to heroku, run
 
-$ git push heroku main
+$ git push heroku main (warning: check stasticfiles/css if problems with css in deployed version)
 
 - Finally, set up the database tables
 
