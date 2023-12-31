@@ -10,6 +10,8 @@ def get_recipename_from_id(val):
    #and the name is returned back
    return recipeName
 
+
+# get_graph & chart modulate how the output of the graph is before entering values
 def get_graph():
    #create a Bytes IO buffer for the image
    buffer = BytesIO()
@@ -70,6 +72,7 @@ def get_chart(search_type, data, **kwargs):
    #specify layout details
    plt.tight_layout()
 
+   plt.gcf().set_facecolor((1, 1, 1, 0.8))
    #render the graph to file
    chart =get_graph() 
    return chart

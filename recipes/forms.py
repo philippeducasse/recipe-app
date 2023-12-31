@@ -7,7 +7,7 @@ from .models import Recipe, Ingredient
 SEARCH__CHOICES = (          #specify choices as a tuple
    ('#1', 'Recipe Name'),    
    ('#2', 'Ingredient'),
-   ('#3', 'Cooking time')
+#    ('#3', 'Cooking time')
    )
 
 #define class-based Form imported from Django forms
