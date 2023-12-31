@@ -1,14 +1,11 @@
 ## Recipe App ##
 
-## TO DO ##
-Add footer with portfolio
-fix homepage
 
 ## Intro
 
 Built with Python Django
 
-<a href="#">Live site </a>
+<a href="https://reci-please-8df178786b88.herokuapp.com" target="_new">Live site </a>
 
 <img src= "./assets/Screenshot1.png" width="300px">
 <img src= "./assets/Screenshot2.png" width="300px">
