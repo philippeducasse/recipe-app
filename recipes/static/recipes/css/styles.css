@@ -48,8 +48,10 @@ body {
     margin-left: 250px;
     padding: 30px;
 }
-.main-menu__list{
+.main-menu__list {
     font-size: large;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ALL RECIPES */
