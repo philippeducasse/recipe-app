@@ -58,15 +58,24 @@
       {{error_message}}
       {% endif %}
 
-      {% comment %} print form {% endcomment %}
-      <form action="" method="POST" class="login-form">
+      <form action="" method="POST" class="signup-form">
          {% comment %} add Django security token {% endcomment %}
          {% csrf_token %}
 
          {% comment %} print form received from view {% endcomment %}
-         {{form}}
+         <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+         </div>
+         <div class="form-group">
+            <label for="id_password1">Password:</label>
+            {{ form.password1 }}
+         </div>
+         <div class="form-group">
+            <label for="id_password2">Confirm Password:</label>
+            {{ form.password2 }}
+         </div>
 
-         {% comment %} add button {% endcomment %}
          <button class="btn btn-success" type="submit">Signup</button>
          <a class="btn btn-info" href="/">Back to home</a>
 
