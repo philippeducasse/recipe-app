@@ -14,8 +14,9 @@ body {
 
 /* NAVBAR */
 
-.navbar-nav{
 
+.nav-link{
+    font-weight: 700!important;
 }
 
 /* HOME PAGE */
@@ -172,7 +173,20 @@ body {
 .login-form *{
     margin: 10px
 }
+/* SIGNUP PAGE */
 
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size-default);
+}
+.signup-form label{
+    font-size: var(--font-size-default);
+    display: block;
+}
+.signup-form *{
+    margin: 10px
+}
 /* CREATE RECIPE PAGE */
 
 .create-recipe{
