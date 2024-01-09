@@ -54,7 +54,9 @@ body {
     display: flex;
     flex-direction: column;
 }
-
+.main-menu__list a{
+    color: #fff;
+}
 /* ALL RECIPES */
 
 .recipes-table{
