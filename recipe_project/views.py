@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-
+# These are the views which are external to the "main app". Their templates are in ./staticfiles
 def login_view(request):
 
     error_message = None
