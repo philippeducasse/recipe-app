@@ -5,7 +5,7 @@
 
 Built with Python Django
 
-<a href="https://reci-please-8df178786b88.herokuapp.com" target="_new">Live site </a>
+<a href="https://recipe-app-zc4m.onrender.com/" target="_new">Live site </a>
 
 <img src= "./assets/Screenshot1.png" width="300px">
 <img src= "./assets/Screenshot2.png" width="300px">
