@@ -88,7 +88,6 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': 'dpg-cnk4d6i1hbls739remug-a',
         'PORT': '5432',
-        ''
     }
 }
 
